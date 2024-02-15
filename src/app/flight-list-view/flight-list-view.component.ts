@@ -11,7 +11,7 @@ import {FlightFacadeService} from "../service/flight.facade";
     styleUrl: './flight-list-view.component.css',
 })
 export class FlightListViewComponent implements AfterViewInit {
-  isLoading = true;
+  isLoading = false;
   flightList$: BehaviorSubject<Flight[]>;
   dataSource: MatTableDataSource<Flight> = new MatTableDataSource<Flight>([]);
   selection = new SelectionModel<Flight>(false, []);
@@ -66,18 +66,6 @@ export class FlightListViewComponent implements AfterViewInit {
   }
 
   getAllFlights(): void {
-      merge()
-          .pipe(
-              startWith({}),
-              switchMap(() => {
-                  this.isLoading = true;
-                  this.flightFacadeService.getFlights();
-                  return of();
-              }),
-              tap(() => {
-                  // Flip flag to show that loading has finished.
-                  this.isLoading = false;
-              }),
-          ).subscribe();
+    this.flightFacadeService.getFlights();
   }
 }

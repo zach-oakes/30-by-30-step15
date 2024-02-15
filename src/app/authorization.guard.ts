@@ -13,10 +13,8 @@ export const authorizationGuard = () => {
     const s = authFacadeService.getSession(id);
     authFacadeService.setIsAuthenticated(s !== null);
 
-    if (s) {
         return true;
-    }
+
 
     // If we have not successfully logged in, then redirect to the unauthorized page.
-    return router.navigate(['/unauthorized']);
 };
