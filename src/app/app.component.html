@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="top-nav">
+    <div class="sidenav-content">
+        <button *ngIf="(isAuthenticated$ | async)" type="button" mat-button class="menu-button" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <span class="app-title">
+                Flight Tracker
+            <mat-icon class="icon">flight</mat-icon>
+        </span>
+    <button *ngIf="(isAuthenticated$ | async)" mat-button [matMenuTriggerFor]="menu" aria-label="profile-button">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <!--Logout Button-->
+    <mat-menu #menu="matMenu">
+        <button class="logout-button" mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+</mat-toolbar>
+<mat-drawer-container class="main-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side">
+
+        <!--Drawer Icons-->
+        <div class="home-button">
+            <button mat-icon-button color="primary" aria-label="home icon" routerLink="dashboard">
+                <mat-icon>home</mat-icon>
+            </button>
+            <p>Home</p>
+        </div>
+        <div class="spacer"></div>
+        <div class="flights-button">
+            <button mat-icon-button color="primary" aria-label="flights icon" routerLink="flights">
+                <mat-icon>list</mat-icon>
+            </button>
+            <p>Flights</p>
+        </div>
+    </mat-drawer>
+    <router-outlet></router-outlet>
+</mat-drawer-container>
