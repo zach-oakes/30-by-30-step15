@@ -4,9 +4,10 @@ import {FlightHttpService} from "./flight-http.service";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Flight} from "../model/flight";
 import {Store} from "@ngrx/store";
+import {loadFlights} from "../flights.actions";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class FlightFacadeService {
@@ -39,9 +40,9 @@ export class FlightFacadeService {
             );
     }
 
-    getFlights(): void {
-        this.store.dispatch({ type: '[Flights Page] Load Flights' });
-    }
+  getFlights(): void {
+    this.store.dispatch(loadFlights());
+  }
 
     getFlight(id: string): Observable<Flight> {
         return this.flightHttpService.getFlight(id)
